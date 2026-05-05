@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\common">
+      <UniqueIdentifier>{e694818e-4797-45c1-9eb5-21b40518b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\components">
+      <UniqueIdentifier>{fcb581ff-2727-4d27-a3e4-3d59210c4155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\drivers">
+      <UniqueIdentifier>{1d3bc22a-66e9-4b26-b1ed-130c25e839d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\interfaces">
+      <UniqueIdentifier>{3e22ad1a-00be-44b2-aae8-f0373c2018db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\common">
+      <UniqueIdentifier>{887aa9e6-3211-4bb6-808e-3d07b63e5dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\components">
+      <UniqueIdentifier>{63ddf330-ba80-4a7e-8c6e-3a173a68cc7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\sample.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\data.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\components\cmd.h">
+      <Filter>头文件\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libiruart.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircam.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd_temp.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\config.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\thirdparty\cJSON\include\cJSON.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\common\data.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\components\cmd.cpp">
+      <Filter>源文件\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sample.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\config.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\cJSON\src\cJSON.c">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

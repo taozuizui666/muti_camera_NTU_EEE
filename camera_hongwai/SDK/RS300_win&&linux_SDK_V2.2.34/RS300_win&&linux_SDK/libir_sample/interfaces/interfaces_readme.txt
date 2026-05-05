@@ -1,0 +1,3 @@
+该目录为libir_sample所需的接口层依赖库头文件存放目录
+可通过lib_include_copy.py将共享库复制到该目录
+分别为：error.h libircam.h libircmd.h libircmd_temp.h libir_infoparse.h

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\common">
+      <UniqueIdentifier>{66a547e3-5512-47b0-bc5f-73e12bcd64b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\common">
+      <UniqueIdentifier>{0c086e35-8ed5-46c7-b657-233bc2ff2c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\components">
+      <UniqueIdentifier>{4b19c376-48fc-4678-a1e0-ed9ede725d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\components">
+      <UniqueIdentifier>{e329ee6d-9d10-40d1-a393-b4bbae061a8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\drivers">
+      <UniqueIdentifier>{f05b0283-3004-40f3-8f16-d640a7fe21ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\interfaces">
+      <UniqueIdentifier>{1474447c-c9b5-444d-a658-7e414752cb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\other">
+      <UniqueIdentifier>{35879b90-a752-4e6b-a1b8-c4d37eafb2ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\thrid_party">
+      <UniqueIdentifier>{3b7e14f8-3279-4276-888a-127fe4dd0eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\thrid_party\cJSON">
+      <UniqueIdentifier>{92f81a94-d1cc-4cca-b20c-101c3a26a1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\third_party">
+      <UniqueIdentifier>{83a4d6ce-1c52-491e-8c9f-10904bc4f1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\third_party\cJSON">
+      <UniqueIdentifier>{5f19940a-ef96-4769-8d1d-16ac3265fcf0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\sample.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\data.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\components\cmd.h">
+      <Filter>头文件\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libiruvc.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircam.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\opencv_display.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\uvc_camera.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libiruart.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd_temp.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\libirtemp.h">
+      <Filter>头文件\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\components\temp_measure.h">
+      <Filter>头文件\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\components\libir_infoparse.h">
+      <Filter>头文件\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\libirparse.h">
+      <Filter>头文件\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\thirdparty\cJSON\include\cJSON.h">
+      <Filter>头文件\thrid_party\cJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\config.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\sample.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\data.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\components\cmd.cpp">
+      <Filter>源文件\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\opencv_display.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\uvc_camera.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\components\temp_measure.cpp">
+      <Filter>源文件\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\cJSON\src\cJSON.c">
+      <Filter>源文件\third_party\cJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\config.cpp">
+      <Filter>源文件\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

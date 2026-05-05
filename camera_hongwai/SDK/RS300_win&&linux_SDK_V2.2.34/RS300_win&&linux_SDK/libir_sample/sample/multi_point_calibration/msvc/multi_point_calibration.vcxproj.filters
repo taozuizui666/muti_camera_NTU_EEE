@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\drivers">
+      <UniqueIdentifier>{c4c8d928-840f-4c8b-a203-4de2c2de5535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\interfaces">
+      <UniqueIdentifier>{e471e8f3-1f28-4519-ab41-70cb8db8f8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\other">
+      <UniqueIdentifier>{e18720b3-c417-44c6-bee9-9ca0ea401092}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\sample.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\sample.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libiruart.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircam.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\libirupgrade.h">
+      <Filter>头文件\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\libirtemp.h">
+      <Filter>头文件\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\interfaces\libircmd_temp.h">
+      <Filter>头文件\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libiruvc.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\drivers\libirdfu.h">
+      <Filter>头文件\drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\other\libirtemp_internal.h">
+      <Filter>头文件\other</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

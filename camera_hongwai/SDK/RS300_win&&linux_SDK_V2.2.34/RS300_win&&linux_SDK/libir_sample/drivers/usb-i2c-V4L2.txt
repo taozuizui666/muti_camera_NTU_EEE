@@ -1,0 +1,23 @@
+usb-i2c-V4L2 驱动
+实现功能：V4L2正常出图与USB发送I2C控制命令能够同时操作，实现v4l2框架兼容和红外私有命令支持。
+解决方案：修改uvcvideo驱动添加私有驱动接口用来发送usb命令。
+实现过程:
+1.在uvc设备open时初始化一个字符设备,保存usb device指针。
+2.字符设备提供读写和ioctl操作，由于usb控制命令数据包参数是结构体所以全部命令使用ioctl实现。
+在ioctl里面调用usb_control_msg发送usb包，设置SET和GET两个命令分别实现读和写操作。
+3.使用ircmd库实现命令集，在ircmd库基础上实现自定义的i2c_usb_data_read i2c_usb_data_write接口函数，
+并且使用自定义的设备handle传入设备文件，在接口函数里面调用ioctl操作。
+4.应用层打开uvc后再打开自定义的字符设备,关闭字符设备后关闭UVC,字符设备依赖于UVC打开关闭按照顺序调用。
+5.支持多设备操作，字符设备节点于video节点没有关联信息，需要指定对应关系。
+
+驱动移植步骤:
+1.拷贝仓库drivers目录代码uvccmd.h uvccmd.c到内核drivers\media\usb\uvc路径
+2.在内核目录drivers\media\usb\uvc Makefile 添加uvcvideo-objs  += uvccmd.o
+3.修改uvc_v4l2.c文件，添加头文件uvccmd.h，
+在uvc_v4l2_open函数返回前调用cmd_init
+在uvc_v4l2_release函数返回前调用cmd_exit。
+
+libircmd是原库
+v4l2_i2c实现i2c的读写函数，供libircmd调用，最终生成libircmd_v4l2.so库供用户调用，API头函数还是libircmd。
+src里面是sample程序提供了库的调用过程示例。
+
