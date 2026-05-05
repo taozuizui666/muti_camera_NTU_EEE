@@ -18,7 +18,6 @@
 
 			sch16t_imu: imu@0 {
                 compatible = "spidev";
-                // compatible = "murata,sch16t-k10";
 				reg = <0>; 
 				spi-max-frequency = <10000000>; 
 			};
