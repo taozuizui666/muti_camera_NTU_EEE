@@ -1,0 +1,5 @@
+load mmc 0:2 0x00400000 Image-6.1.99-rk3588
+load mmc 0:2 0x08300000 dtb/rk3588-lubancat-5io.dtb
+booti 0x00400000 - 0x08300000
+
+sudo mount /dev/mmcblk1p2 /mnt/sd2

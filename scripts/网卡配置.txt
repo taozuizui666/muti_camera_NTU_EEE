@@ -1,0 +1,21 @@
+nmcli connection show	查看网络配置
+
+sudo nmcli con add type ethernet \
+  ifname eth0 \
+  con-name eth0-static \
+  ipv4.method manual \
+  ipv4.addresses 192.168.137.100/24 \
+  ipv4.gateway 192.168.137.1 \
+  ipv4.dns 8.8.8.8 \
+  connection.autoconnect yes
+
+sudo nmcli con add type ethernet \
+  ifname eth0 \
+  con-name eth0-static \
+  ipv4.method manual \
+  ipv4.addresses 192.168.5.100/24 \
+  ipv4.gateway 192.168.5.1 \
+  ipv4.dns 8.8.8.8 \
+  connection.autoconnect yes
+
+
