@@ -1,0 +1,1 @@
+cmd_/home/zuizui/WiFi2/BL616_HostDriver/usb/bl_usb_drv.ko := aarch64-none-linux-gnu-ld -r  -EL  -maarch64elf -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/zuizui/WiFi2/BL616_HostDriver/usb/bl_usb_drv.ko /home/zuizui/WiFi2/BL616_HostDriver/usb/bl_usb_drv.o /home/zuizui/WiFi2/BL616_HostDriver/usb/bl_usb_drv.mod.o;  true

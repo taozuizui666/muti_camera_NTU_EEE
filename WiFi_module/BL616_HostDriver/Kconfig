@@ -1,0 +1,42 @@
+config BL616L
+        tristate "BL616L wireless driver"
+        select CFG80211
+        select WIRELESS_EXT
+        select WEXT_CORE
+        select WEXT_PROC
+        select WIRELESS_EXT
+        select CRYPTO
+        select WEXT_SPY
+        select WEXT_PRIV
+        default m
+        help
+          This is for BL616L SDIO/USB wireless driver
+ 
+if BL616L
+
+choice
+    prompt "BL616L WIFI BLE configuration"
+    default BL_SDIO
+    help
+      Select WIFI only or WIFI BLE combo, and their hardware interface. Select only one of these [BL_SDIO BL_BTSDU BL_BTUART BL_USB BL_BTUSB]
+
+config BL_SDIO
+    bool "WIFI over SDIO only."
+
+config BL_BTSDU
+    bool "WIFI over SDIO and BLE over SDIO combo."
+
+config BL_BTUART
+    bool "WIFI over SDIO and BLE over UART combo."
+
+config BL_USB
+    bool "WIFI over USB only."
+
+config BL_BTUSB
+    bool "WIFI over USB and BLE over USB combo."
+
+endchoice
+
+endif # BL616L
+
+

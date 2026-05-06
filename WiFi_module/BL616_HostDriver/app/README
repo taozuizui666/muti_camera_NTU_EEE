@@ -1,0 +1,76 @@
+==================================
+User Manual For blutl
+==================================
+
+blutl: The util is used to set/get paramaters of bouffalolab WiFi driver.
+
+
+COMMAND LIST:
+	blutl wlanX version
+	blutl wlanX temp
+	blutl wlanX scan
+    blutl wlanX scan_chan 
+	blutl wlanX scan_ie  
+	blutl wlanX country_code
+	blutl wlanX mac_addr
+	blutl wlanX rssi
+	blutl wlanX read_efuse
+	blutl wlanX status
+    blutl wlanX event
+
+COMMAND DESCRIPTION:
+version
+	This command is used to get the version of driver and FW.
+	
+	Usage:
+		blutl wlan0 version
+
+temp
+	This command is used to get the IC temperature, unit 1 centigrade.
+
+scan
+    This command is used to start user defined scan 	
+	Usage:
+		blutl wlan0 scan [0/1]
+		0： clear scan ie/channel setting
+		1： start scan 
+
+scan_chan
+    This command is used to set scan channel list
+	Usage:
+		blutl wlanX scan_chan [chan1] [chan2] [chan3]
+
+scan_ie
+    This command is used to set scan ie		
+	Usage:
+		blutl wlan0 scan_ie [id] [len] [payload] 
+
+country_code
+    This command is used to get country code
+	Usage:
+		blutl wlan0 country_code
+
+mac_addr
+    This command is used to get mac address
+	Usage:
+		blutl wlan0 mac_addr
+	
+rssi	
+    This command is used to get rssi value
+	Usage:
+		blutl wlan0 rssi
+	
+read_efuse	
+    This command is used to get xtal/power offset/mac address in efuse
+	Usage:
+		blutl wlan0 read_efuse
+
+status	
+    This command is used to get wifi mode status, ap mode/sta mode/bridge mode
+	Usage:
+		blutl wlan0 status
+
+event	
+    This command is used to monitor event from driver
+	Usage:
+		blutl wlan0 event		
