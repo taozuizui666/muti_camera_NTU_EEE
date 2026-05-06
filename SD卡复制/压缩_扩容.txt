@@ -1,0 +1,34 @@
+## 压缩：
+
+1. 先把SD卡用读卡器连接电脑，在电脑上卸载挂载的SD卡
+sudo umount /dev/sda2
+sudo umount /dev/sda3
+
+2. 根据情况压缩系统盘，这里用10G,注意不要写10GB
+sudo resize2fs /dev/sda3 10G 
+
+3. 用parted来配置压缩情况
+sudo parted /dev/sda
+用print查看分区大小，再用resizepart 设置结束位置，差不多是压缩大小+1GB
+resizepart 3 11GB
+quit
+
+4. 压缩好后转为镜像文件，count由大小决定，count*bs>=系统盘大小
+sudo dd if=/dev/sda of=~/Downloads/lubancat.img bs=16M count=1000 status=progress conv=fsync
+
+##
+
+## 扩容：
+
+1. 用parted来配置扩容情况
+sudo parted /dev/mmcblk1
+用print查看分区大小，再用resizepart 设置结束位置，差不多是压缩大小+1GB
+resizepart 3 51GB
+quit
+
+2. 让内核刷新分区表
+sudo partprobe
+
+3. 在线自动扩满整个 50GB 分区
+sudo resize2fs /dev/mmcblk1p3
+
