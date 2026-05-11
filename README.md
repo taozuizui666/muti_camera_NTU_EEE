@@ -16,6 +16,8 @@
 * iio_device文件夹对应使用我编写的iio_imu_drv.ko驱动，设备树插件的compatible做出了对应的修改。iio（Industrial I/O）是kernel提供的专门用于处理各类传感器和数据采集设备的子系统，主要处理ADC、IMU等，选择iio是因为他提供了一套标准化接口 + 数据模型，具体核心原理还没有时间仔细研究。通过iio方式创建的设备在/sys/bus/iio/devices/iio:device0/ ..iio:device1/等，正常情况iio:device0是ADC,iio:device1是我们的IMU。我也提供了imu_read.c程序，编译好了之后可以在开发板上运行，测试设备节点地址是否正确
 
 ## camera_hongwai
+linux 6之后设备树中对port节点的修改需要加上”@地址“，参考我提供的dts文件，否则修改不产生效果
+
 
 ## DTS
 一开始为了方便采用的是直接修改dtc反汇编出来的dts文件，但是因为要修改很多设备的配置，此方法比较乱，后期采用dtbo补丁的形式修改设备树配置。
