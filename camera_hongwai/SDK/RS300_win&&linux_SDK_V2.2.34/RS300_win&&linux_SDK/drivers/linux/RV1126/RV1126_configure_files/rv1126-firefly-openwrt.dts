@@ -49,9 +49,11 @@
 		reg = <0x3c>;
 		clocks = <&cru CLK_MIPICSI_OUT>;
 		clock-names = "xvclk";
+
 		power-domains = <&power RV1126_PD_VI>;
 		pinctrl-names = "rockchip,camera_default";
 		pinctrl-0 = <&mipicsi_clk0>;
+		
 		avdd-supply = <&vcc_avdd>;
 		dovdd-supply = <&vcc_dovdd>;
 		dvdd-supply = <&vcc_dvdd>;

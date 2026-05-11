@@ -282,9 +282,9 @@ struct pll_ctrl_reg {
 };
 
 static const char * const rs300_supply_names[] = {
-	"dovdd",	/* Digital I/O power */
-	"avdd",		/* Analog power */
-	"dvdd",		/* Digital core power */
+	"dovdd-supply",	/* Digital I/O power */
+	"avdd-supply",		/* Analog power */
+	"dvdd-supply",		/* Digital core power */
 };
 
 #define rs300_NUM_SUPPLIES ARRAY_SIZE(rs300_supply_names)
@@ -723,6 +723,7 @@ static const struct v4l2_subdev_internal_ops rs300_subdev_internal_ops = {
 static int rs300_probe(struct i2c_client *client,
 			const struct i2c_device_id *id)
 {
+	printk("rs300 probe\n");
 	struct device *dev = &client->dev;
 	struct device_node *node = dev->of_node;
 	struct v4l2_subdev *sd;
@@ -750,24 +751,7 @@ static int rs300_probe(struct i2c_client *client,
 
 
 	rs300->client = client;
- 
- 
-	//获取设备树配置引脚，这里非常关键，RKISP1的驱动不会自动配置pinctrl切换引脚复用到dvp模式。
-	//cif驱动包含引脚状态切换代码，无需再控制,注意引脚与网口复用
-	/*
- 	struct pinctrl *pinctrl=devm_pinctrl_get(&client->dev);
-	struct pinctrl_state * pins_default = pinctrl_lookup_state(
-					pinctrl,
-					"rockchip,camera_default");
-	if(IS_ERR(pins_default))
-		dev_err(&client->dev, "%s: pinctrl_lookup_state error\n",
-			__func__);				
-	 ret = pinctrl_select_state(pinctrl, pins_default);
-	if (ret < 0){
-		dev_err(&client->dev, "%s: pinctrl_select_state error %d\n",
-			__func__, ret);
-		goto error;
-	}*/
+
 	v4l2_ctrl_handler_init(&rs300->ctrls, 2);
 	rs300->link_frequency =	v4l2_ctrl_new_int_menu(&rs300->ctrls, NULL,
 		V4L2_CID_LINK_FREQ, 0, 0, link_freq_menu_items);
@@ -787,6 +771,14 @@ static int rs300_probe(struct i2c_client *client,
 
 	sd = &rs300->sd;
 	v4l2_i2c_subdev_init(sd, client, &rs300_subdev_ops);
+	printk("v4l2_i2c_subdev_init\n");
+
+	sd->owner = THIS_MODULE;
+	sd->dev = dev;
+	sd->fwnode = dev_fwnode(dev);
+
+	sd->internal_ops = &rs300_subdev_internal_ops;
+	sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
 
 
 #ifdef CONFIG_VIDEO_V4L2_SUBDEV_API
@@ -796,9 +788,11 @@ static int rs300_probe(struct i2c_client *client,
 #endif
 
 #if defined(CONFIG_MEDIA_CONTROLLER)
+	printk("rs300 media entity init\n");
 	rs300->pad.flags = MEDIA_PAD_FL_SOURCE;
 	sd->entity.function = MEDIA_ENT_F_CAM_SENSOR;
 	ret = media_entity_pads_init(&sd->entity, 1, &rs300->pad);
+	printk("pads init ret=%d\n", ret);
 	if (ret < 0) {
 		v4l2_ctrl_handler_free(&rs300->ctrls);
 		return ret;
@@ -820,6 +814,7 @@ static int rs300_probe(struct i2c_client *client,
 		 printk("rs300 %s\n",sd->name);
 	// ret = v4l2_async_register_subdev_sensor_common(sd);
 	ret = v4l2_async_register_subdev_sensor(sd);
+	printk("async register ret=%d\n", ret);
 
 	if (ret)
 		goto error;
@@ -839,6 +834,7 @@ error:
 
 static void rs300_remove(struct i2c_client *client)
 {
+	printk("rs300 remove\n");
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct rs300 *rs300 = to_rs300(sd);
 
@@ -869,7 +865,8 @@ MODULE_DEVICE_TABLE(of, rs300_of_match);
 static struct i2c_driver rs300_i2c_driver = {
 	.driver = {
 		.name	= DRIVER_NAME,
-		.of_match_table = of_match_ptr(rs300_of_match),
+		// .of_match_table = of_match_ptr(rs300_of_match),
+		.of_match_table = rs300_of_match,
 	},
 	.probe		= rs300_probe,
 	.remove		= rs300_remove,
