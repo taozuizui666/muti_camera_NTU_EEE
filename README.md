@@ -17,6 +17,7 @@
 
 ## camera_hongwai
 linux 6之后设备树中对port节点的修改需要加上”@地址“，参考我提供的dts文件，否则修改不产生效果
+摄像头驱动必须编译进kernel内核，否则。。
 
 
 ## DTS
