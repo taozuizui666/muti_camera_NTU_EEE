@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# Kconfig entry for Murata SCH16T IMU driver.
+# Add this block to drivers/iio/imu/Kconfig (in-tree), or use
+# it stand-alone for an out-of-tree build.
+
+config SCH16T
+    tristate "Murata SCH16T IMU driver"
+    depends on SPI
+    select IIO_BUFFER
+    select IIO_TRIGGERED_BUFFER
+    help
+      Say Y or M here to enable support for the Murata SCH16T series
+      6-DOF inertial measurement units (gyroscope + accelerometer)
+      connected over SPI.
+
+      Supported variants:
+        - SCH16T-K01  (high-sensitivity gyro, 1600–6400 LSB/dps)
+        - SCH16T-K10  (standard-range gyro,   100–400  LSB/dps)
+
+      The driver registers with the IIO subsystem and exposes angular
+      velocity (rad/s), linear acceleration (m/s²) and temperature
+      channels through sysfs and the IIO triggered-buffer interface.
+
+      To compile this driver as a module, choose M here. The module
+      will be called sch16t.

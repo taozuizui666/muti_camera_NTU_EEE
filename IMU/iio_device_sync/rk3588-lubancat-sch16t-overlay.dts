@@ -1,0 +1,104 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * sch16t-overlay.dts
+ *
+ * Device Tree overlay for the Murata SCH16T-K10 IMU on SPI bus 0, CS 0.
+ *
+ * Tested on Raspberry Pi 4 (BCM2711).  Adapt spi0 / reg / spi-max-frequency
+ * for other platforms.
+ *
+ * Build:
+ *   dtc -@ -I dts -O dtb -o sch16t.dtbo sch16t-overlay.dts
+ *
+ * Install (RPi):
+ *   sudo cp sch16t.dtbo /boot/overlays/
+ *   # Add to /boot/config.txt:
+ *   #   dtoverlay=sch16t
+ *   sudo reboot
+ *
+ * After boot the IIO device appears at:
+ *   /sys/bus/iio/devices/iio:device0/
+ *
+ * Reading a channel (example):
+ *   cat /sys/bus/iio/devices/iio:device0/in_anglvel_x_raw
+ *   cat /sys/bus/iio/devices/iio:device0/in_anglvel_x_scale
+ *
+ * Using iio_generic_buffer with an hrtimer trigger:
+ *   # Create a 100 Hz hrtimer trigger
+ *   echo 0 > /sys/bus/iio/devices/iio_sysfs_trigger/add_trigger
+ *   echo iio_hrtimer_trigger0 > /sys/bus/iio/devices/iio:device0/trigger/current_trigger
+ *   iio_generic_buffer -n sch16t -t iio_hrtimer_trigger0 -c 100
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+
+ / {
+	fragment@0 {
+		target = <&fan>;
+		
+		__overlay__ {
+			/* close fan*/
+			status = "disabled";
+		};
+	};
+
+	fragment@1 {
+		target = <&pwm11>;
+
+		__overlay__ {
+			/* enable pwm11 m3 as sync */
+			status = "okay";
+			pinctrl-names = "active";
+			pinctrl-0 = <&pwm11m3_pins>;
+		};
+	};
+
+	fragment@2 {
+		target = <&spi0>;
+
+		__overlay__ {
+			status = "okay";
+
+			/* 关键：告诉内核这是 SPI 子设备 */
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			pinctrl-names = "default";
+			pinctrl-0 = <&spi0m3_cs0 &spi0m3_pins>;
+
+			num-cs = <1>;
+
+			sch16t_imu: imu@0 {
+				compatible = "murata,sch16t-k10";
+				
+                /* SPI chip-select index */
+                reg = <0>;
+
+                /* SCH16T max SPI clock is 10 MHz */
+                spi-max-frequency = <10000000>;
+
+                /*
+                 * SCH16T uses SPI MODE 0 (CPOL=0, CPHA=0).
+                 * Do NOT add spi-cpol or spi-cpha properties.
+                 */
+
+                /*
+                 * Optional: if you wire EXTRESN to a GPIO, add:
+                 *   reset-gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
+                 *
+                 * The driver currently does not use this GPIO but the
+                 * property is reserved for future support.
+                 */
+                /* 引用 pwm11，通道 0，默认 400Hz */
+				/* pwms = <&pwm11 0 2500000 0>;*/
+
+				/* DRY 中断引脚，根据实际硬件修改 */
+				/*irq-gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;*/
+			};
+		};
+	};
+};
