@@ -21,49 +21,30 @@ Unlike standard IIO hrtimer triggers, this driver uses a **hardware PWM**
 as the sampling clock and an **external GPIO interrupt** (DRY pin) as the
 buffer push trigger:
 
+```
 ┌─────────────────┐      PWM CLK      ┌─────────────┐
-
 │   PWM Device    │ ─────────────────>│  SCH16T     │
-
 │  (e.g. pwm11)   │                   │   IMU       │
-
 └─────────────────┘                   │             │
-
                                       │ DRY pin     │
-
 ┌─────────────────┐                   │ (Data Ready)│
-
 │  GPIO Interrupt │ <─────────────────│             │
-
 │  (e.g. GPIO0_A0)│                   └─────────────┘
-
 └────────┬────────┘
-
          |
-
          V
-
 ┌─────────────────────────────────────────────────────────────┐
-
 │                    Kernel IIO Subsystem                     │
-
 │  ┌───────────────────────────────────────────────────────┐  │
-
 │  │  sch16t_irq_thread_fn()                               │  │
-
 │  │   - SPI burst read (7 channels)                       │  │
-
 │  │   - iio_push_to_buffers_with_timestamp()              │  │
-
 │  └───────────────────────────────────────────────────────┘  │
-
 │                           │                                 │
-
 │                           ▼                                 │
-
 │              /dev/iio:deviceN (triggered buffer)            │
-
 └─────────────────────────────────────────────────────────────┘
+```
 
 
 **Key Features:**
