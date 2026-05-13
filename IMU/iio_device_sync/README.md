@@ -156,8 +156,8 @@ echo 0 | sudo tee /sys/bus/iio/devices/iio:device0/pwm_frequency
 ### Reading individual channels
 
 ```bash
-# Start sampling at 50 Hz (must have before read otherwise the data can't update)
-echo 50 | sudo tee /sys/bus/iio/devices/iio:device0/pwm_frequency
+# Start sampling at 100 Hz (must have before read otherwise the data can't update)
+echo 100 | sudo tee /sys/bus/iio/devices/iio:device0/pwm_frequency
 
 # Raw gyroscope counts (20-bit signed)
 cat /sys/bus/iio/devices/iio:device0/in_anglvel_x_raw
