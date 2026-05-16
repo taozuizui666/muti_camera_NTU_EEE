@@ -7,6 +7,10 @@
 * 通常datasheet/doc文件夹下是该设备的产品手册
 * 这里设备树补丁和设备树插件都指代——dtbo
 
+## Img
+此处放了image镜像文件的下载链接：https://drive.google.com/file/d/1d78SW7-2XXpZVXxw0RozXRzj3dk4NHC8/view?usp=drive_link（包含IMU、Wifi和红外摄像头的驱动）
+后续其他的image会列在这里
+
 ## WIFI_module
 此文件夹下有4个子文件夹： BL616_HostDriver、FW、doc、usb。对于rk3588开发板我已经交叉编译好了WIFI的usb驱动，参考doc里面的Linux驱动移植手册，将FW里面的对应bin文件放在开发板的/lib/firmware目录下面，再挂载ko驱动即可连上wifi；对于其他型号的CPU请自行交叉编译，注意官方提供的SDK里的驱动程序用的函数是基于linux kernel 6 版本的，如果用的kernel是5 版本会出现内核函数不适配的情况。
  
