@@ -1,0 +1,187 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+#include <dt-bindings/clock/rk3588-cru.h>
+#include <dt-bindings/power/rk3588-power.h>
+
+/ {
+	fragment@0 {
+		target = <&i2c0>;
+		__overlay__ {
+			status = "okay";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			rs300: rs300@3c {
+				status = "okay";
+				compatible = "infisense,rs300-mipi";
+				reg = <0x3c>;
+
+				clocks = <&ext_cam_24m_clk>;
+				clock-names = "xvclk";
+				power-domains = <&power RK3588_PD_VI>;
+				dovdd-supply= <&cam_dovdd>; /* 1.8v */
+				avdd-supply = <&cam_avdd>;  /* 2.8v */
+				dvdd-supply = <&cam_dvdd>;  /* 1.2v */
+
+				rockchip,camera-module-index = <0>;
+				rockchip,camera-module-facing = "back";
+				rockchip,camera-module-name = "RS300";
+				rockchip,camera-module-lens-name = "NC";
+
+				port {
+					rs300_out: endpoint {
+						remote-endpoint = <&dcphy0_in>;
+						clock-lanes = <0>;
+						data-lanes = <1 2>;
+					};
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&csi2_dcphy0>;
+		__overlay__ {
+			status = "okay";
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@0 {
+					reg = <0>;
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					dcphy0_in: endpoint@1 {
+						reg = <1>;
+						remote-endpoint = <&rs300_out>;
+						data-lanes = <1 2>;
+					};
+				};
+
+				port@1 {
+					reg = <1>;
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					dcphy0_out: endpoint@0 {
+						reg = <0>;
+						remote-endpoint = <&mipi0_csi2_in>;
+					};
+				};
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&mipi0_csi2>;
+		__overlay__ {
+			status = "okay";
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@0 {
+					reg = <0>;
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					mipi0_csi2_in: endpoint@1 {
+						reg = <1>;
+						remote-endpoint = <&dcphy0_out>;
+					};
+				};
+
+				port@1 {
+					reg = <1>;
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					mipi0_csi2_out: endpoint@0 {
+						reg = <0>;
+						remote-endpoint = <&cif_mipi_in>;
+					};
+				};
+			};
+		};
+	};
+
+	fragment@3 {
+		target = <&mipi_dcphy0>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@4 {
+		target = <&rkcif>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target = <&rkcif_mipi_lvds>;
+		__overlay__ {
+			status = "okay";
+			port {
+				cif_mipi_in: endpoint {
+					remote-endpoint = <&mipi0_csi2_out>;
+					bus-type = <4>;   /* V4L2_MBUS_CSI2_DPHY = 4 */
+				};
+			};
+		};
+	};
+
+	fragment@6 {
+		target = <&rkcif_mipi_lvds_sditf>;
+		__overlay__ {
+			status = "okay";
+			port {
+				mipi_lvds_sditf: endpoint {
+					remote-endpoint = <&isp0_vir0_in>;
+				};
+			};
+		};
+	};
+
+	fragment@7 {
+		target = <&rkcif_mmu>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@8 {
+		target = <&rkisp0>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@9 {
+		target = <&isp0_mmu>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@10 {
+		target = <&rkisp0_vir0>;
+		__overlay__ {
+			status = "okay";
+			port {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				isp0_vir0_in: endpoint@0 {
+					reg = <0>;
+					remote-endpoint = <&mipi_lvds_sditf>;
+				};
+			};
+		};
+	};
+};
