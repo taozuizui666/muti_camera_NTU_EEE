@@ -23,8 +23,17 @@
 * iio_device文件夹对应使用我编写的iio_imu_drv.ko驱动，设备树插件的compatible做出了对应的修改。iio（Industrial I/O）是kernel提供的专门用于处理各类传感器和数据采集设备的子系统，主要处理ADC、IMU等，选择iio是因为他提供了一套标准化接口 + 数据模型，具体核心原理还没有时间仔细研究。通过iio方式创建的设备在/sys/bus/iio/devices/iio:device0/ ..iio:device1/等，正常情况iio:device0是ADC,iio:device1是我们的IMU。我也提供了imu_read.c程序，编译好了之后可以在开发板上运行，测试设备节点地址是否正确
 
 ## camera_hongwai
-linux 6之后设备树中对port节点的修改需要加上”@地址“，参考我提供的dts文件，否则修改不产生效果
-摄像头驱动必须编译进kernel内核，否则。。
+目前camera_hongwai文件夹下有2个子文件夹和4个文件。子文件夹分别是SDK和存放手册的datasheet,供参考。
+* rs300-mipi.c： 红外摄像头驱动，放置在kernel/drivers/media/i2c/目录下，并修改此文件夹下的Kconfig和Makefile，用menuconfig打开RS300的驱动生成.config文件后编译kernel。RS300在menuconfig中的开启路径：Device Drivers > Multimedia support > Media ancillary drivers > Camera sensor devices > RS300xxx
+* Image： 编译好的kernel image文件，包含IMU和rs300红外驱动
+* camera_rs300_hongwai.dts： 红外摄像头的设备树插件源码
+* capture_picture.txt： 抓图和显示成png的指令，主要用于test
+note：
+摄像头驱动必须编译进kernel内核，否则开机kernel在7秒左右时就会检查完所有Async异步设备，不管是自动挂载还是手动挂载驱动的ko文件都会慢于7秒，从而就算是挂载上了也不起作用。确保编译进kernel后看到对于rkcif的：Async subdev notifier completed，rkisp可以不用管：
+[    7.542137] rockchip-mipi-csi2: Async registered subdev
+[    7.673306] rkcif-mipi-lvds: Async subdev notifier completed
+[    7.673717] rkisp0-vir0: Async subdev notifier completed
+
 
 
 ## DTS
