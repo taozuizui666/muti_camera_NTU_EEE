@@ -10,7 +10,7 @@
 ## Img
 此处放了image镜像文件的下载链接（包含IMU、Wifi和红外摄像头的驱动）：https://drive.google.com/file/d/1d78SW7-2XXpZVXxw0RozXRzj3dk4NHC8/view?usp=drive_link
 
-需结合[SD卡复制](#SD卡复制) 章节进行烧录
+需结合[SD卡复制](#SD卡复制) 章节进行烧录。烧录之后拥有下面描述的所有功能和配置，可以直接进行应用层开发。
 
 后续其他的image会列在这里
 
@@ -30,7 +30,7 @@
 * capture_picture.txt： 抓图和显示成png的指令，主要用于test
 
 ### note：
-摄像头驱动必须编译进kernel内核，否则开机kernel在7秒左右时就会检查完所有Async异步设备，不管是自动挂载还是手动挂载驱动的ko文件都会慢于7秒，从而就算是挂载上了也不起作用。
+1. 摄像头驱动必须编译进kernel内核，否则开机kernel在7秒左右时就会检查完所有Async异步设备，不管是自动挂载还是手动挂载驱动的ko文件都会慢于7秒，从而就算是挂载上了也不起作用。
 
 确保编译进kernel后看到对于rkcif的：Async subdev notifier completed，rkisp可以不用管：
 
