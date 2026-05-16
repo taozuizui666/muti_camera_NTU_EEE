@@ -8,7 +8,7 @@
 * 这里设备树补丁和设备树插件都指代——dtbo
 
 ## Img
-此处放了image镜像文件的下载链接：https://drive.google.com/file/d/1d78SW7-2XXpZVXxw0RozXRzj3dk4NHC8/view?usp=drive_link（包含IMU、Wifi和红外摄像头的驱动）
+此处放了image镜像文件的下载链接（包含IMU、Wifi和红外摄像头的驱动）：https://drive.google.com/file/d/1d78SW7-2XXpZVXxw0RozXRzj3dk4NHC8/view?usp=drive_link
 后续其他的image会列在这里
 
 ## WIFI_module
