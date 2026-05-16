@@ -26,7 +26,7 @@
 目前camera_hongwai文件夹下有2个子文件夹和4个文件。子文件夹分别是SDK和存放手册的datasheet,供参考。
 * rs300-mipi.c： 红外摄像头驱动，放置在kernel/drivers/media/i2c/目录下，并修改此文件夹下的Kconfig和Makefile，用menuconfig打开RS300的驱动生成.config文件后编译kernel。RS300在menuconfig中的开启路径：Device Drivers > Multimedia support > Media ancillary drivers > Camera sensor devices > RS300xxx
 * Image： 编译好的kernel image文件，包含IMU和rs300红外驱动
-* camera_rs300_hongwai.dts： 红外摄像头的设备树插件源码
+* camera_rs300_hongwai.dts： 红外摄像头的设备树插件源码，编译好的dtbo放在主目录的DTS/dtbo/i2c_camera目录下
 * capture_picture.txt： 抓图和显示成png的指令，主要用于test
 
 ### note：
@@ -43,7 +43,11 @@
 
 
 ## DTS
-一开始为了方便采用的是直接修改dtc反汇编出来的dts文件，但是因为要修改很多设备的配置，此方法比较乱，后期采用dtbo补丁的形式修改设备树配置。
+此文件夹下目前有一个子文件夹dtbo、一个txt文件和一个dtb文件。一开始为了方便采用的是直接修改dtc反汇编出来的dts文件，但是因为要修改很多设备的配置，此方法比较乱，后期采用dtbo补丁的形式修改设备树配置。
+* dtbo ： 存放目前编译好的设备树插件，包括IMU、红外摄像头、关闭默认复用的插件。插件应放在开发板的：/boot/dtb/overlay目录下，并修改/boot/uEnv/uEnv.txt文件。
+* rk3588-lubancat-5io.dtb： 主设备树，可以替换开发板的设备树。开发板的设备树路径：/boot/dtb
+* uEnvLubanCat5IO.txt： U-boot开机配置文件，替换开发板的/boot/uEnv/uEnv.txt文件
+
 
 ## SD卡复制
 考虑到后期的多款产品用相似的系统，需要复制同一张SD卡，这里单独用一个文件夹来提供相关手段。SD卡容量如果过大需要压缩之后做成镜像拷贝，否则很容易超出电脑容量。
