@@ -29,7 +29,7 @@
 * camera_rs300_hongwai.dts： 红外摄像头的设备树插件源码
 * capture_picture.txt： 抓图和显示成png的指令，主要用于test
 
-###note：
+### note：
 摄像头驱动必须编译进kernel内核，否则开机kernel在7秒左右时就会检查完所有Async异步设备，不管是自动挂载还是手动挂载驱动的ko文件都会慢于7秒，从而就算是挂载上了也不起作用。确保编译进kernel后看到对于rkcif的：Async subdev notifier completed，rkisp可以不用管：
 [    7.542137] rockchip-mipi-csi2: Async registered subdev
 [    7.673306] rkcif-mipi-lvds: Async subdev notifier completed
