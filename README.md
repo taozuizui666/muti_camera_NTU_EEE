@@ -31,15 +31,12 @@
 
 ### note：
 1. 摄像头驱动必须编译进kernel内核，否则开机kernel在7秒左右时就会检查完所有Async异步设备，不管是自动挂载还是手动挂载驱动的ko文件都会慢于7秒，从而就算是挂载上了也不起作用。
-
-确保编译进kernel后看到对于rkcif的：Async subdev notifier completed，rkisp可以不用管：
-
-[    7.542137] rockchip-mipi-csi2: Async registered subdev
-
-[    7.673306] rkcif-mipi-lvds: Async subdev notifier completed
-
-[    7.673717] rkisp0-vir0: Async subdev notifier completed
-
+   确保编译进kernel后看到对于rkcif的：Async subdev notifier completed，rkisp可以不用管：
+   [    7.542137] rockchip-mipi-csi2: Async registered subdev
+   [    7.673306] rkcif-mipi-lvds: Async subdev notifier completed
+   [    7.673717] rkisp0-vir0: Async subdev notifier completed
+2. 如果用抓图指令经常抓到纯黑图，用hexdump看看是否全是0x8000、0x8001、0x8002之类的，用dmesg查看是否出现0x10 fs/fe mis、f_seq、size=0之类的error，断电重启可以解决这个问题。
+3. 导线容易接触不良，如果出不了图可以断电重新接试试
 
 
 ## DTS
